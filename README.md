@@ -115,6 +115,8 @@ The notebook generates visualizations showing:
 - Loss reduction during training
 - Training vs. validation performance comparison
 
+![Training Curve](training-curve.png)
+
 ---
 
 ## Key Insights 🔍
@@ -134,6 +136,8 @@ Visualize the learned word embeddings with the [TensorFlow Embedding Projector](
 2. Upload these files to the Embedding Projector.
 3. Explore word relationships and clusters in the learned embedding space.
 4. Discover how the model represents sarcastic vs. non-sarcastic language patterns.
+
+![Demo Embedding Projector](demo.gif)
 
 ---
 
