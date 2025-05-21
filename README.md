@@ -10,16 +10,20 @@
 
 ## Overview 📖
 
-This project demonstrates a **binary sarcasm classifier** for news headlines using [TensorFlow](https://www.tensorflow.org/) and [Keras](https://keras.io/). The repository contains two different model implementations:
+This project demonstrates a **binary sarcasm classifier** for news headlines using [TensorFlow](https://www.tensorflow.org/) and [Keras](https://keras.io/). The repository contains three different model implementations:
 
 1. **Basic Embedding with Global Average Pooling** - A simple and efficient model for baseline performance
 2. **Bidirectional LSTM** - An advanced model architecture that captures sequence context in both directions
+3. **1D Convolutional Neural Network** - A model that extracts local patterns and features from text
 
-Both models process raw text headlines, convert them into numerical sequences using text vectorization, and predict whether a headline is **sarcastic** 😏 or **not sarcastic** 📰.
+All models process raw text headlines, convert them into numerical sequences using text vectorization, and predict whether a headline is **sarcastic** 😏 or **not sarcastic** 📰.
 
 ---
 
 ## Table of Contents 📑
+
+- [Overview](#overview-)
+- [Features](#features-)
 - [Dataset](#dataset-)
 - [Model Architectures](#model-architectures-)
 - [Getting Started](#getting-started-)
@@ -82,11 +86,32 @@ Dense Layer (1 unit, Sigmoid)
 Binary Classification Output
 ```
 
+### 1D Convolutional Neural Network
+
+```
+Input Layer (32 tokens max)
+    ↓
+TextVectorization (10,000 vocab)
+    ↓
+Embedding Layer (16 dimensions)
+    ↓
+Conv1D (128 filters, kernel size 5, ReLU)
+    ↓
+GlobalMaxPooling1D
+    ↓
+Dense Layer (6 units, ReLU)
+    ↓
+Dense Layer (1 unit, Sigmoid)
+    ↓
+Binary Classification Output
+```
+
 **Key Parameters:**
 - Vocabulary Size: 10,000 tokens
 - Max Sequence Length: 32 tokens
 - Embedding Dimensions: 16
 - LSTM Units: 32 (bidirectional, resulting in 64-dimensional output)
+- Conv1D Filters: 128 with kernel size 5
 - Training Examples: 20,000
 - Padding Type: 'pre'
 - Truncation Type: 'post'
@@ -117,6 +142,7 @@ pip install -r requirements.txt
 2. Open and run the desired notebook:
    - `C3_W2_Lab_2_sarcasm_classifier.ipynb` - Basic model with GlobalAveragePooling
    - `C3_W3_Lab_5_sarcasm_with_bi_LSTM.ipynb` - Advanced model with Bidirectional LSTM
+   - `C3_W3_Lab_6_sarcasm_with_1D_convolutional.ipynb` - Model with 1D Convolutional layer
 3. Follow the notebook steps to:
    - Load and preprocess the data
    - Build and compile the model
@@ -128,8 +154,9 @@ pip install -r requirements.txt
 
 ## 📂 Code Structure
 
-- `C3_W2_Lab_2_sarcasm_classifier.ipynb` - Basic model implementation
+- `C3_W2_Lab_2_sarcasm_classifier.ipynb` - Basic model implementation with GlobalAveragePooling
 - `C3_W3_Lab_5_sarcasm_with_bi_LSTM.ipynb` - Bidirectional LSTM model implementation
+- `C3_W3_Lab_6_sarcasm_with_1D_convolutional.ipynb` - 1D Convolutional model implementation
 - `sarcasm.json` - Dataset file (download separately)
 - `requirements.txt` - List of dependencies
 - `vecs.tsv` - Exported word vectors (generated after training)
@@ -143,7 +170,8 @@ pip install -r requirements.txt
 - **Training Accuracy:** ~96% after 10 epochs
 - **Validation Accuracy:** ~84% (with some overfitting observed)
 - **Model Size:** Fewer parameters, computationally efficient
-- **Training Speed:** Faster training time
+- **Training Speed:** Fastest training time
+- **Advantages:** Simple architecture, good baseline performance
 
 ![Training Curve](training-curve.png)
 
@@ -155,6 +183,15 @@ pip install -r requirements.txt
 - **Advantages:** Better captures word order and context in both directions
 
 ![Training Curve](training-curve-2.png)
+
+### 1D Convolutional Model
+- **Training Accuracy:** ~98% after 10 epochs
+- **Validation Accuracy:** ~85-86%
+- **Model Size:** 139,399 parameters (less than LSTM, more than basic model)
+- **Training Speed:** Faster than LSTM but slower than the basic model
+- **Advantages:** Captures local n-gram patterns effectively, good at detecting key phrases
+
+![Training Curve](training-curve-3.png)
 
 ### Training Curves
 The notebooks generate visualizations showing:
@@ -180,10 +217,12 @@ This results in faster training times and better resource utilization.
 ## Key Insights 🔍
 
 1. **Bidirectional LSTM** captures word order and context in both directions, potentially improving performance on sequence-sensitive tasks
-2. **Global Average Pooling** model provides a simpler architecture with fewer parameters
-3. **Text Vectorization** layer provides efficient preprocessing integrated into the model
-4. Both models show signs of **overfitting** after several epochs
-5. **Hyperparameter tuning** opportunities exist for vocabulary size, embedding dimensions, LSTM units, and dense layer architecture
+2. **1D Convolutional layers** with GlobalMaxPooling effectively identify the most important n-gram features in the text
+3. **Global Average Pooling** model provides a simpler architecture with fewer parameters
+4. **Text Vectorization** layer provides efficient preprocessing integrated into the model
+5. All models show signs of **overfitting** after several epochs
+6. **Validation accuracy** is similar across all three models (~84-86%), suggesting that for this specific dataset, the architecture choices provide marginal improvements
+7. **Hyperparameter tuning** opportunities exist for vocabulary size, embedding dimensions, LSTM units, convolutional filters, and dense layer architecture
 
 ---
 
@@ -205,11 +244,13 @@ Visualize the learned word embeddings with the [TensorFlow Embedding Projector](
 - Experiment with different architectures (GRU, Transformer-based models)
 - Implement regularization techniques to reduce overfitting (dropout, L2 regularization)
 - Stack multiple Bidirectional LSTM layers for deeper context understanding
+- Try hybrid models combining CNN and RNN features
+- Experiment with different Conv1D filter sizes and number of filters
 - Try different vocabulary sizes and embedding dimensions
 - Add attention mechanisms for better context understanding
 - Explore transfer learning with pre-trained embeddings (Word2Vec, GloVe)
 - Multi-class classification for different types of sarcasm
-- Combine LSTM features with CNN features for hybrid models
+- Ensemble multiple model types for potentially better performance
 
 ---
 
