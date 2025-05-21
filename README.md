@@ -19,17 +19,18 @@ Both models process raw text headlines, convert them into numerical sequences us
 
 ---
 
-## Features 🚀
-
-- Advanced text preprocessing with `TextVectorization` layer 🔤
-- Multiple model architectures (GlobalAveragePooling and Bidirectional LSTM) 🧠
-- Efficient word embeddings 🎯
-- Binary classification for sarcasm detection 🏷️
-- Comprehensive training and validation metrics 📈
-- TF.Data pipeline optimization for efficient processing 🔄
-- Hyperparameter optimization capabilities 🛠️
-- Word embedding visualization exports 🌐 for the [TensorFlow Embedding Projector](https://projector.tensorflow.org/)
-- Overfitting detection and mitigation strategies 🔍
+## Table of Contents 📑
+- [Dataset](#dataset-)
+- [Model Architectures](#model-architectures-)
+- [Getting Started](#getting-started-)
+- [Code Structure](#-code-structure)
+- [Results and Performance Comparison](#results-and-performance-comparison-)
+- [TF.Data Pipeline Optimization](#tfdata-pipeline-optimization-)
+- [Key Insights](#key-insights-)
+- [TensorFlow Embedding Projector](#tensorflow-embedding-projector-)
+- [Future Work](#future-work-)
+- [Acknowledgements](#acknowledgements-)
+- [Contact](#contact-)
 
 ---
 
