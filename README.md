@@ -144,6 +144,8 @@ pip install -r requirements.txt
 - **Model Size:** Fewer parameters, computationally efficient
 - **Training Speed:** Faster training time
 
+![Training Curve](training-curve.png)
+
 ### Bidirectional LSTM Model
 - **Training Accuracy:** ~97% after 10 epochs
 - **Validation Accuracy:** ~84-85% 
@@ -151,13 +153,13 @@ pip install -r requirements.txt
 - **Training Speed:** Slower than the basic model but captures sequential information
 - **Advantages:** Better captures word order and context in both directions
 
+![Training Curve](training-curve-2.png)
+
 ### Training Curves
 The notebooks generate visualizations showing:
 - Accuracy progression over epochs
 - Loss reduction during training
 - Training vs. validation performance comparison
-
-![Training Curve](training-curve.png)
 
 ---
 
